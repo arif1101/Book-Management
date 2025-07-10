@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useGetBooksQuery } from "../../redux/api/bookCreateApi";
+import { useDeleteBookMutation, useGetBooksQuery } from "../../redux/api/bookCreateApi";
+import Swal from 'sweetalert2';
 import Modal from "../../components/Modal";
 import UpdateBookForm from "../updateBookForm/UpdateBookForm";
 
 export default function Books() {
   const { data, isLoading } = useGetBooksQuery({});
+  const [deleteBook] = useDeleteBookMutation();
   const books = data?.data ?? [];
   const [selectedBook, setSelectedBook] = useState(null)
 
@@ -17,9 +19,26 @@ export default function Books() {
   //   alert("borrow")
   // }
 
-  // const handleDelete = (id: string) => {
-  //   alert("delete")
-  // }
+  const handleDelete = async(id: string) => {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'You won’t be able to revert this!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#e3342f',  // red
+    cancelButtonColor: '#6c757d',   // gray
+    confirmButtonText: 'Yes, delete it!',
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        await deleteBook(id).unwrap();
+        Swal.fire('Deleted!', 'Book has been deleted.', 'success');
+      } catch (err) {
+        Swal.fire('Failed', 'Something went wrong.', 'error');
+      }
+    }
+  });
+  }
   
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
@@ -94,7 +113,7 @@ export default function Books() {
 
                       {/* Delete */}
                       <button
-                        // onClick={() => handleDelete(book.id)}
+                        onClick={() => handleDelete(book._id)}
                         className="flex items-center gap-1 px-4 py-1.5 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-md transition"
                       >
                         🗑️ <span>Delete</span>
