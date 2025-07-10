@@ -6,7 +6,7 @@ export default function Book({book}) {
         <img
         src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
         alt="Shoes"
-        className="rounded-xl" />
+        className="rounded-xl h-[270px]" />
     </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title">{book.title}</h2>
