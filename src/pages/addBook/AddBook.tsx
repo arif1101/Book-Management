@@ -2,6 +2,7 @@ import React from "react";
 import {useForm} from "react-hook-form"
 import { useAddBookMutation } from "../../redux/api/bookCreateApi";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 type BookFormInputs = {
     title: string,
@@ -19,6 +20,7 @@ export default function AddBook() {
     const {
         register,
         handleSubmit,
+        reset,
         formState: {errors},
         trigger,
     } = useForm<BookFormInputs>({
@@ -36,10 +38,13 @@ export default function AddBook() {
     const onSubmit = async(data: BookFormInputs) => {
         try{
             const result = await addBook({...data, available: data.copies>0}).unwrap();
+            toast.success("📚 Book added successfully!")
+            reset();
             console.log("success", result);
             navigate("/books")
         }catch(error){
             console.log("Failed to add book", error)
+            toast.error("❌ Failed to add book.");
         }
     };
 

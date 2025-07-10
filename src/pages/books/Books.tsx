@@ -1,9 +1,26 @@
+import { useState } from "react";
 import { useGetBooksQuery } from "../../redux/api/bookCreateApi";
+import Modal from "../../components/Modal";
+import UpdateBookForm from "../updateBookForm/UpdateBookForm";
 
 export default function Books() {
   const { data, isLoading } = useGetBooksQuery({});
   const books = data?.data ?? [];
+  const [selectedBook, setSelectedBook] = useState(null)
 
+  const handleEdit = (book) => {
+    setSelectedBook(book)
+  }
+
+
+  // const handleBorrow = (id: string) => {
+  //   alert("borrow")
+  // }
+
+  // const handleDelete = (id: string) => {
+  //   alert("delete")
+  // }
+  
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-semibold mb-6 text-center text-gray-800">📚 Library Books</h1>
@@ -18,6 +35,7 @@ export default function Books() {
               <th className="text-left px-6 py-3">ISBN</th>
               <th className="text-center px-6 py-3">Copies</th>
               <th className="text-center px-6 py-3">Availability</th>
+              <th className="text-center px-6 py-3">Actions</th>
             </tr>
           </thead>
           <tbody className="text-sm divide-y divide-gray-200">
@@ -55,12 +73,47 @@ export default function Books() {
                       {book.copies > 0 ? "Available" : "Unavailable"}
                     </span>
                   </td>
+                  {/* Action Buttons  */}
+                  <td className="px-6 py-4 text-center">
+                    <div className="flex justify-center gap-2">
+                      {/* Edit */}
+                      <button
+                        onClick={() => handleEdit(book)}
+                        className="flex items-center gap-1 px-4 py-1.5 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-md transition"
+                      >
+                        ✏️ <span>Edit</span>
+                      </button>
+
+                      {/* Borrow */}
+                      <button
+                        // onClick={() => handleBorrow(book.id)}
+                        className="flex items-center gap-1 px-4 py-1.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 rounded-md transition"
+                      >
+                        📘 <span>Borrow</span>
+                      </button>
+
+                      {/* Delete */}
+                      <button
+                        // onClick={() => handleDelete(book.id)}
+                        className="flex items-center gap-1 px-4 py-1.5 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-md transition"
+                      >
+                        🗑️ <span>Delete</span>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
       </div>
+      {
+        selectedBook && (
+          <Modal isOpen={!!selectedBook} onClose={() => setSelectedBook(null)}>
+            <UpdateBookForm book={selectedBook} onClose={() => setSelectedBook(null)}/>
+          </Modal>
+        )
+      }
     </div>
   );
 }
