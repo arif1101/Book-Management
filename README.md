@@ -1,4 +1,6 @@
 # 📚 BookStack – Minimal Library Management System
+**🌐 Live Demo:**  
+[https://book-management-indol-five.vercel.app/](https://book-management-indol-five.vercel.app/)
 
 A clean and minimal library management frontend built with:
 
@@ -107,5 +109,3 @@ npm install sweetalert2
 ```bash
 npm run dev
 ```
-
-Then open [http://localhost:5173](http://localhost:5173) in your browser.
