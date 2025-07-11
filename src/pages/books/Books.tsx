@@ -3,19 +3,22 @@ import { useDeleteBookMutation, useGetBooksQuery } from "../../redux/api/bookCre
 import Swal from 'sweetalert2';
 import Modal from "../../components/Modal";
 import UpdateBookForm from "../updateBookForm/UpdateBookForm";
+import BorrowBookForm from "../borrowBookForm/BorrowBookForm";
 
 export default function Books() {
   const { data, isLoading } = useGetBooksQuery({});
   const [deleteBook] = useDeleteBookMutation();
   const books = data?.data ?? [];
   const [selectedBook, setSelectedBook] = useState(null)
+  const [borrowBookTarget, setBorrowBookTarget] = useState<{id: string; title: string; copies: number} | null>(null)
 
   const handleEdit = (book) => {
     setSelectedBook(book)
   }
 
+  // console.log(borrowBookTarget)
 
-  // const handleBorrow = (id: string) => {
+  // const set = (id: string) => {
   //   alert("borrow")
   // }
 
@@ -105,7 +108,7 @@ export default function Books() {
 
                       {/* Borrow */}
                       <button
-                        // onClick={() => handleBorrow(book.id)}
+                        onClick={() => setBorrowBookTarget({id: book._id, title: book.title, copies: book.copies})}
                         className="flex items-center gap-1 px-4 py-1.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 rounded-md transition"
                       >
                         📘 <span>Borrow</span>
@@ -130,6 +133,19 @@ export default function Books() {
         selectedBook && (
           <Modal isOpen={!!selectedBook} onClose={() => setSelectedBook(null)}>
             <UpdateBookForm book={selectedBook} onClose={() => setSelectedBook(null)}/>
+          </Modal>
+        )
+      }
+      {
+        borrowBookTarget && (
+          <Modal
+          isOpen={!!borrowBookTarget}
+          onClose={()=> setBorrowBookTarget(null)}
+          >
+            <BorrowBookForm 
+            book={borrowBookTarget} 
+            onClose={()=> setBorrowBookTarget(null)}
+            />
           </Modal>
         )
       }
