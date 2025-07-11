@@ -52,7 +52,7 @@ export const booksApi = createApi({
     // POST /borrow
     borrowBook: builder.mutation<
       { message: string },
-      { bookId: string; quantity: number; dueDate: string }
+      { book: string; quantity: number; dueDate: string }
     >({
       query: (body) => ({
         url: 'borrow',

@@ -32,7 +32,7 @@ export default function BorrowBookForm({book, onClose}: BorrowProps) {
         console.log(book.id, data.quantity, data.dueDate)
         try {
         await borrowBook({
-            bookId: book.id,
+            book: book.id,
             quantity: data.quantity,
             dueDate: data.dueDate,
         }).unwrap();
