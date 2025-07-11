@@ -16,12 +16,6 @@ export default function Books() {
     setSelectedBook(book)
   }
 
-  // console.log(borrowBookTarget)
-
-  // const set = (id: string) => {
-  //   alert("borrow")
-  // }
-
   const handleDelete = async(id: string) => {
   Swal.fire({
     title: 'Are you sure?',

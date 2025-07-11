@@ -5,10 +5,8 @@ export default function BorrowSummary() {
   const { data, isLoading } = useGetBorrowSummaryQuery({});
   const summary = data?.data ?? [];     // ← aggregated list from your API
 
-  console.log('one row →', summary[0]);
-
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-8 min-h-[700px]">
       <h1 className="text-3xl font-semibold mb-6 text-center text-gray-800">
         📊 Borrow Summary
       </h1>

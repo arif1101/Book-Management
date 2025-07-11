@@ -9,21 +9,21 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="bg-white max-w-6xl sticky top-0 z-50 mx-auto shadow">
-      <nav className="mx-auto px-4 py-3 flex items-center justify-between">
+    <header className="max-w-6xl mx-auto bg-gradient-to-r from-white to-blue-50 shadow-lg sticky top-0 z-50">
+      <nav className="px-6 py-5 flex items-center justify-between">
         {/* Left: Brand */}
-        <div className="text-xl font-bold text-blue-600 tracking-wide">
-          BookStack 📖
+        <div className="text-2xl font-extrabold text-blue-700 tracking-wide">
+          BookStack <span className="text-3xl">📖</span>
         </div>
 
         {/* Center: Navigation links */}
-        <ul className="hidden lg:flex gap-6 text-gray-700 font-medium text-sm">
+        <ul className="hidden lg:flex gap-10 text-gray-800 font-medium text-base">
           {links.map((link) => (
             <li key={link.to}>
               <NavLink
                 to={link.to}
                 className={({ isActive }) =>
-                  `hover:text-blue-600 transition ${
+                  `hover:text-blue-600 transition duration-200 ${
                     isActive ? "text-blue-600 font-semibold" : ""
                   }`
                 }
@@ -34,29 +34,30 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Right: Profile Button */}
-        <div className="flex items-center gap-2">
-          <button className="btn btn-sm btn-outline btn-primary rounded-full px-4">
+        {/* Right: Profile + Mobile Menu */}
+        <div className="flex items-center gap-3">
+          {/* Profile Button */}
+          <button className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow hover:bg-blue-700 transition">
             👤 Profile
           </button>
 
           {/* Mobile Menu */}
           <div className="dropdown dropdown-end lg:hidden">
-            <label tabIndex={0} className="btn btn-sm btn-ghost">
+            <label tabIndex={0} className="btn btn-ghost text-xl">
               ☰
             </label>
             <ul
               tabIndex={0}
-              className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-40"
+              className="menu dropdown-content mt-4 p-3 shadow-xl bg-white rounded-box w-48 space-y-1"
             >
               {links.map((link) => (
                 <li key={link.to}>
                   <NavLink
                     to={link.to}
                     className={({ isActive }) =>
-                      isActive
-                        ? "text-blue-600 font-semibold"
-                        : "text-gray-700"
+                      `block px-3 py-2 rounded hover:bg-blue-100 ${
+                        isActive ? "text-blue-600 font-semibold" : "text-gray-800"
+                      }`
                     }
                   >
                     {link.label}
