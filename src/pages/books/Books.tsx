@@ -4,15 +4,24 @@ import Swal from 'sweetalert2';
 import Modal from "../../components/Modal";
 import UpdateBookForm from "../updateBookForm/UpdateBookForm";
 import BorrowBookForm from "../borrowBookForm/BorrowBookForm";
+type Book = {
+  _id: string;
+  id?: string; // if both _id and id are present
+  title: string;
+  author: string;
+  genre: string;
+  isbn: string;
+  copies: number;
+};
 
 export default function Books() {
   const { data, isLoading } = useGetBooksQuery({});
   const [deleteBook] = useDeleteBookMutation();
-  const books = data?.data ?? [];
-  const [selectedBook, setSelectedBook] = useState(null)
+  const books: Book[] = data?.data ?? [];
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null)
   const [borrowBookTarget, setBorrowBookTarget] = useState<{id: string; title: string; copies: number} | null>(null)
 
-  const handleEdit = (book) => {
+  const handleEdit = (book: Book) => {
     setSelectedBook(book)
   }
 
@@ -30,7 +39,7 @@ export default function Books() {
       try {
         await deleteBook(id).unwrap();
         Swal.fire('Deleted!', 'Book has been deleted.', 'success');
-      } catch (err) {
+      } catch {
         Swal.fire('Failed', 'Something went wrong.', 'error');
       }
     }

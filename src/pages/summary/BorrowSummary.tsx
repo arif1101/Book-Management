@@ -40,7 +40,7 @@ export default function BorrowSummary() {
             ) : (
               summary.map(
                 (
-                  item: { title: string; isbn: string; total: number },
+                  item: {book: {title: string; isbn: string;}; totalQuantity: number},
                   idx: number
                 ) => (
                   <tr

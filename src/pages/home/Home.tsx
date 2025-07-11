@@ -1,9 +1,20 @@
 import { Link } from "react-router";
 import { useGetBooksQuery } from "../../redux/api/bookCreateApi";
 
+type Book = {
+  id?: string;
+  _id?: string;
+  title: string;
+  author: string;
+  genre: string;
+  isbn?: string;
+  copies?: number;
+};
+
+
 export default function Home() {
   const { data } = useGetBooksQuery({});
-  const books = data?.data ?? [];
+  const books:Book[]= data?.data ?? [];
   const featuredBooks = books.slice(0, 3);
 
   return (
@@ -59,7 +70,7 @@ export default function Home() {
       <section>
         <h2 className="text-3xl font-bold text-center text-pink-600 mb-10">📌 Featured Books</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {featuredBooks.map((book) => (
+          {featuredBooks.map((book: Book) => (
             <div
               key={book.id}
               className="bg-white border border-gray-200 rounded-xl p-6 shadow-md hover:shadow-xl transition-transform transform hover:-translate-y-1"

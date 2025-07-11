@@ -31,7 +31,7 @@ export default function UpdateBookForm({ book, onClose }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+    // reset,
   } = useForm<BookForm>({
     defaultValues: {
       title: book?.title || '',
