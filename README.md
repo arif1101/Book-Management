@@ -1,69 +1,111 @@
-# React + TypeScript + Vite
+# 📚 BookStack – Minimal Library Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean and minimal library management frontend built with:
 
-Currently, two official plugins are available:
+- ⚛️ **React + TypeScript**
+- 🎯 **Redux Toolkit Query (RTK Query)**
+- 💨 **Tailwind CSS + DaisyUI**
+- 🔀 **React Router (data mode)**
+- 📋 **React Hook Form**
+- 🔔 **React Hot Toast**
+- ⚠️ **SweetAlert2**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- View all books (title, author, genre, ISBN, copies, availability)
+- Add, edit, and delete books
+- Borrow a book (quantity, due date)
+- Borrow summary (aggregated by book)
+- No authentication required
+- Fully responsive design
+- Modal and page-based design pattern
+- Toast notifications & confirmation alerts
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🧰 Installation & Setup
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/your-username/bookstack.git
+cd bookstack
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2️⃣ Install dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+---
+
+### 🛠️ Stack Configuration
+
+#### ✅ TailwindCSS + DaisyUI
+
+TailwindCSS and DaisyUI are already configured in `tailwind.config.js`. DaisyUI provides pre-built styled components.
+
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm install daisyui
+```
+
+#### ✅ Redux Toolkit + RTK Query
+
+All API logic is organized in:
+
+```
+src/redux/api/bookCreateApi.ts
+```
+
+```bash
+npm install @reduxjs/toolkit react-redux
+```
+
+#### ✅ React Router (Data mode)
+
+Set up using `createBrowserRouter` and `RouterProvider`.
+
+```bash
+npm install react-router-dom
+```
+
+#### ✅ React Hook Form
+
+For form handling with validation.
+
+```bash
+npm install react-hook-form
+```
+
+#### ✅ React Hot Toast
+
+For toast alerts (success/failure).
+
+```bash
+npm install react-hot-toast
+```
+
+Add `<Toaster />` once in `MainLayout.tsx`.
+
+#### ✅ SweetAlert2
+
+Used for delete confirmation.
+
+```bash
+npm install sweetalert2
+```
+
+---
+
+### 🧪 Start the App
+
+```bash
+npm run dev
+```
+
+Then open [http://localhost:5173](http://localhost:5173) in your browser.
